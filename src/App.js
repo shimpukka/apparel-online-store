@@ -30,7 +30,9 @@ class App extends React.Component {
 							id: snapShot.id,
 							...snapShot.data()
 						}
-					}, ()=> console.log(this.state))
+					}, ()=> console.log(this.state));
+
+					console.log(this.state);
 				})
 			} else { // if user is not logged in (i.e. userAuth = null)
 				this.setState({currentUser: userAuth});
