@@ -19,10 +19,22 @@ class App extends React.Component {
 	unsubscribeFromAuth = null;
 
 	componentDidMount() {
-		this.unsubscribeFromAuth = auth.onAuthStateChanged(async user => {
-			//this.setState({ currentUser: user })
-			//console.log(user);
-			createUserProfileDocument(user);
+		this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
+			if(userAuth) { // if user is logged in,
+				const userRef = await createUserProfileDocument(userAuth); // create user if it doesn't exist in firestore and return userRef
+
+				// store user data in the state of this app
+				userRef.onSnapshot(snapShot => {
+					this.setState({
+						currentUser : {
+							id: snapShot.id,
+							...snapShot.data()
+						}
+					}, ()=> console.log(this.state))
+				})
+			} else { // if user is not logged in (i.e. userAuth = null)
+				this.setState({currentUser: userAuth});
+			}
 		})
 	}
 
