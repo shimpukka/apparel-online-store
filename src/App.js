@@ -22,8 +22,7 @@ class App extends React.Component {
 		this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
 			if(userAuth) { // if user is logged in,
 				const userRef = await createUserProfileDocument(userAuth); // create user if it doesn't exist in firestore and return userRef
-				
-				console.log('test');
+
 				// store user data in the state of this app
 				userRef.onSnapshot(snapShot => {
 					this.setState({
