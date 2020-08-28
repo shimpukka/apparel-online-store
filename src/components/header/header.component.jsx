@@ -4,6 +4,9 @@ import './header.styles.scss';
 import { ReactComponent as Logo } from '../../assets/crown.svg';
 import { auth } from '../../firebase/firebase.utils';
 
+// to pull off values from the redux store
+import { connect } from 'react-redux';
+
 const Header = ( { currentUser } ) => {
 	return(
 		<div className='header'>
@@ -31,4 +34,14 @@ const Header = ( { currentUser } ) => {
 	);
 }
 
-export default Header;
+// Here define what you want to pass in to Header component from the reducer
+const mapStateToProps = state => ({
+	currentUser: state.user.currentUser,
+})
+
+/* 
+	Connect is a higher order component, i.e. function that gives back modified function 
+	Below connect 'powers up' Header component with state pulled from the redux state
+	So we don't need to pass props from App.js like <Header currentUser={this.state.currentUser} />
+*/
+export default connect(mapStateToProps)(Header);
