@@ -1,7 +1,7 @@
 // create store from root reducer
 
 import { createStore, applyMiddleware } from 'redux';
-import logger from 'redux-logger'; // this is for debugging redux code
+import logger from 'redux-logger';
 
 import rootReducer from './root-reducer';
 

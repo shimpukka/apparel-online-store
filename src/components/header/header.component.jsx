@@ -39,8 +39,8 @@ const mapStateToProps = state => ({
 	currentUser: state.user.currentUser,
 })
 
-/* 
-	Connect is a higher order component, i.e. function that gives back modified function 
+/*
+	Connect is a higher order component, i.e. function that gives back modified function
 	Below connect 'powers up' Header component with state pulled from the redux state
 	So we don't need to pass props from App.js like <Header currentUser={this.state.currentUser} />
 */
