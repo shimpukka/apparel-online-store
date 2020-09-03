@@ -1,12 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-
 // to pull off values from the redux store
 import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
 
 import { auth } from '../../firebase/firebase.utils';
 import CartIcon from '../../components/cart-icon/cart-icon.component';
 import CartDropdown from '../../components/cart-dropdown/cart-dropdown.component';
+import { selectCartHidden } from '../../redux/cart/cart.selectors';
+import { selectCurrentUser } from '../../redux/user/user.selectors';
 
 import { ReactComponent as Logo } from '../../assets/crown.svg';
 
@@ -41,9 +43,16 @@ const Header = ( { currentUser, hidden } ) => {
 }
 
 // Here define what you want to pass in to Header component from the reducer
-const mapStateToProps = ({ user: { currentUser }, cart: { hidden } }) => ({
-	currentUser,
-	hidden
+
+// const mapStateToProps = (state) => ({
+// 	currentUser: selectCurrentUser(state),
+// 	hidden: selectCartHidden(state)
+// })
+
+// Using createStructuredSelector. This is equivalant to the code above
+const mapStateToProps = createStructuredSelector({
+	currentUser: selectCurrentUser,
+	hidden: selectCartHidden
 })
 
 /*
