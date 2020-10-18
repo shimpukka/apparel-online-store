@@ -27,7 +27,7 @@ class App extends React.Component {
 	unsubscribeFromAuth = null;
 
 	componentDidMount() {
-		const {setCurrentUser} = this.props;
+		const {setCurrentUser } = this.props;
 		this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
 			if(userAuth) { // if user is logged in,
 				const userRef = await createUserProfileDocument(userAuth); // create user if it doesn't exist in firestore and return userRef
@@ -43,6 +43,7 @@ class App extends React.Component {
 				})
 			} else { // if user is not logged in (i.e. userAuth = null)
 				setCurrentUser(userAuth);
+				//  addCollectionAndDocuments('collections', collectionsArray.map( ({title, items}) => ({title, items})));
 			}
 		})
 	}
@@ -68,7 +69,8 @@ class App extends React.Component {
 
 // get state
 const mapStateToProps = createStructuredSelector ({
-	currentUser: selectCurrentUser
+	currentUser: selectCurrentUser,
+	// collectionsArray: selectCollectionForPreview
 });
 
 // update state (reducer)
